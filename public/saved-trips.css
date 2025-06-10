@@ -1,0 +1,204 @@
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f5f7fa;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+.header {
+  width: 100%;
+  background: #3182ce;
+  color: #fff;
+  padding: 1rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.header a {
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.header a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.saved-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 2rem 2.5rem;
+}
+h2 {
+  color: #2d3748;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  font-weight: 600;
+}
+.saved-list {
+  width: 100%;
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+.saved-trip {
+  background: #f9fafb;
+  border-radius: 14px;
+  padding: 1.3rem 1.2rem 1.1rem 1.2rem;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid #e2e8f0;
+  transition: box-shadow 0.2s;
+  position: relative;
+}
+.trip-route {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 0.7rem;
+  width: 100%;
+  font-size: 1.18rem;
+  font-weight: 600;
+  color: #2d3748;
+  letter-spacing: 0.5px;
+}
+.trip-route .origin {
+  color: #3182ce;
+  font-weight: 700;
+  font-size: 1.18rem;
+  letter-spacing: 1px;
+}
+.trip-route .arrow {
+  font-size: 1.2rem;
+  color: #a0aec0;
+  margin: 0 0.2rem;
+  font-weight: 400;
+}
+.trip-route .destination {
+  color: #e53e3e;
+  font-weight: 700;
+  font-size: 1.18rem;
+  letter-spacing: 1px;
+}
+.trip-details {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  margin-bottom: 0.3rem;
+  width: 100%;
+}
+.trip-detail {
+  color: #4a5568;
+  font-size: 1rem;
+  background: #edf2f7;
+  border-radius: 6px;
+  padding: 0.3rem 0.8rem;
+  margin-bottom: 0.2rem;
+  display: inline-block;
+}
+.display-name {
+  color: #718096;
+  font-size: 0.98rem;
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+.no-saved {
+  color: #a0aec0;
+  font-style: italic;
+  margin-top: 0.5rem;
+  grid-column: 1/-1;
+  text-align: center;
+}
+.delete-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: #e53e3e;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.4rem 0.9rem 0.4rem 0.7rem;
+  border-radius: 7px;
+  transition: background 0.18s, color 0.18s;
+  outline: none;
+  margin-top: 0.7rem;
+  margin-left: -0.2rem;
+}
+.delete-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: #f8d7da;
+  color: #b22222;
+}
+.delete-btn:hover:not(:disabled), .delete-btn:focus-visible:not(:disabled) {
+  background: #ffe5e5;
+  color: #b22222;
+}
+.delete-icon {
+  width: 1.25em;
+  height: 1.25em;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.1em;
+  transition: filter 0.18s;
+}
+.delete-btn:disabled .delete-icon {
+  filter: grayscale(0.7) brightness(1.2);
+}
+.delete-text {
+  display: inline-block;
+  vertical-align: middle;
+}
+@media (max-width: 600px) {
+  .saved-container {
+    padding: 1rem 0.5rem;
+    max-width: 100vw;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .header {
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 1rem;
+    padding: 0.7rem 0;
+  }
+  .saved-list {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .saved-trip {
+    padding: 1rem 0.7rem 0.8rem 0.7rem;
+    border-radius: 10px;
+    font-size: 0.98rem;
+  }
+  .trip-route {
+    font-size: 1rem;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .trip-details {
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+  }
+  .display-name {
+    font-size: 0.92rem;
+  }
+  .delete-btn {
+    font-size: 0.95rem;
+    padding: 0.3rem 0.7rem 0.3rem 0.5rem;
+    margin-top: 0.5rem;
+  }
+}

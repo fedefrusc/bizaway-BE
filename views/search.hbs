@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Trip Results</title>
+  <link rel="icon" type="image/svg+xml" href="/public/favicon.svg" />
+  <link rel="stylesheet" href="/public/search.css" />
+</head>
+<body>
+  <div class="header">
+    <a href="/">Home</a>
+    <a href="/saved-trips">Saved Trips</a>
+  </div>
+  <div class="results-container">
+    <h2>Results for {{query.origin}} → {{query.destination}}</h2>
+    {{#if results.length}}
+      <table>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Cost</th>
+            <th>Duration (min)</th>
+            <th>Display Name</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          {{#each results}}
+            <tr>
+              <td>{{type}}</td>
+              <td>{{cost}}</td>
+              <td>{{duration}}</td>
+              <td>{{display_name}}</td>
+              <td>
+                <form action="/save-trip" method="POST" style="margin:0;" onsubmit="event.preventDefault(); saveTrip(this);">
+                  <input type="hidden" name="_id" value="{{_id}}" />
+                  <input type="hidden" name="origin" value="{{origin}}" />
+                  <input type="hidden" name="destination" value="{{destination}}" />
+                  <input type="hidden" name="type" value="{{type}}" />
+                  <input type="hidden" name="cost" value="{{cost}}" />
+                  <input type="hidden" name="duration" value="{{duration}}" />
+                  <input type="hidden" name="display_name" value="{{display_name}}" />
+                  <button type="submit" style="background:#3182ce;color:#fff;border:none;border-radius:6px;padding:0.4rem 1rem;font-size:0.95rem;cursor:pointer;transition:background 0.2s; {{#if is_saved}}opacity:0.6;{{/if}}" {{#if is_saved}}disabled style="opacity:0.6;"{{/if}}>{{#if is_saved}}Saved{{else}}Save{{/if}}</button>
+                </form>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    {{else}}
+      <p>No trips found.</p>
+    {{/if}}
+    <a href="/" style="display:inline-block;margin-top:1.5rem;color:#3182ce;">Back to search</a>
+  </div>
+  <div id="toast" style="display:none;position:fixed;top:84px;right:32px;z-index:9999;background:#38a169;color:#fff;padding:1rem 2rem;border-radius:8px;font-size:1.1rem;box-shadow:0 2px 8px rgba(0,0,0,0.12);transition:opacity 0.3s;opacity:0;">Trip was saved successfully</div>
+  <div id="toast-error" style="display:none;position:fixed;top:80px;right:32px;z-index:9999;background:#e53e3e;color:#fff;padding:1rem 2rem;border-radius:8px;font-size:1.1rem;box-shadow:0 2px 8px rgba(0,0,0,0.12);transition:opacity 0.3s;opacity:0;">Trip already saved</div>
+  <script>
+  function saveTrip(form) {
+    const button = form.querySelector('button[type=submit]');
+    button.disabled = true;
+    const fd = new FormData(form);
+    const data = Object.fromEntries(fd.entries());
+    fetch('/save-trip', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(async res => {
+      if (res.ok) {
+        const toast = document.getElementById('toast');
+        toast.style.display = 'block';
+        toast.style.opacity = '1';
+        setTimeout(() => {
+          toast.style.opacity = '0';
+          setTimeout(() => { toast.style.display = 'none'; }, 400);
+        }, 2000);
+      } else if (res.status === 400) {
+        const data = await res.json().catch(() => ({}));
+        if (data?.message && typeof data.message === 'string' && data.message.startsWith('E11000')) {
+          const toastErr = document.getElementById('toast-error');
+          toastErr.style.display = 'block';
+          toastErr.style.opacity = '1';
+          setTimeout(() => {
+            toastErr.style.opacity = '0';
+            setTimeout(() => { toastErr.style.display = 'none'; }, 400);
+          }, 2000);
+        }
+      }
+    }).finally(() => {
+      button.disabled = false;
+    });
+  }
+  </script>
+</body>
+</html>

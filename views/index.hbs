@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trip Search</title>
+    <link rel="icon" type="image/svg+xml" href="/public/favicon.svg" />
+    <link rel="stylesheet" href="/public/index.css" />
+  </head>
+  <body>
+    <div class="header">
+      <a href="/">Home</a>
+      <a href="/saved-trips">Saved Trips</a>
+    </div>
+    <div class="main-container">
+      <div class="search-container">
+        <h1>Search for Trips</h1>
+        <form action="/search" method="GET">
+          <div class="fields-row">
+            <div class="field-group">
+              <label for="origin">Origin:</label>
+              <select id="origin" name="origin" required>
+                <option value="" disabled selected>Origin</option>
+                {{#each origins}}
+                  <option value="{{this}}">{{this}}</option>
+                {{/each}}
+              </select>
+            </div>
+            <div class="field-group">
+              <label for="destination">Destination:</label>
+              <select id="destination" name="destination" required>
+                <option value="" disabled selected>Destination</option>
+                {{#each destinations}}
+                  <option value="{{this}}">{{this}}</option>
+                {{/each}}
+              </select>
+            </div>
+            <div class="field-group">
+              <label for="sort_by">Sort by:</label>
+              <select id="sort_by" name="sort_by">
+                <option value="" selected>None</option>
+                <option value="fastest">Fastest</option>
+                <option value="cheapest">Cheapest</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

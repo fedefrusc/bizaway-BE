@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Saved Trips</title>
+  <link rel="icon" type="image/svg+xml" href="/public/favicon.svg" />
+  <link rel="stylesheet" href="/public/saved-trips.css" />
+</head>
+<body>
+  <div class="header">
+    <a href="/">Home</a>
+    <a href="/saved-trips">Saved Trips</a>
+  </div>
+  <div class="saved-container">
+    <h2>Your Saved Trips</h2>
+    <div class="saved-list">
+      {{#if trips.length}}
+        {{#each trips}}
+          <div class="saved-trip" data-id="{{_id}}">
+            <div class="trip-route">
+              <span class="origin">{{origin}}</span>
+              <span class="arrow">&#8594;</span>
+              <span class="destination">{{destination}}</span>
+            </div>
+            <div class="trip-details">
+              <span class="trip-detail">Type: {{type}}</span>
+              <span class="trip-detail">Cost: {{cost}}</span>
+              <span class="trip-detail">Duration: {{duration}} min</span>
+            </div>
+            <div class="display-name">{{display_name}}</div>
+            <button class="delete-btn" data-id="{{_id}}" aria-label="Delete trip" title="Delete this trip">
+              <svg class="delete-icon" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="11" cy="11" r="11" fill="#e53e3e"/>
+                <path d="M7 7L15 15M15 7L7 15" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
+              </svg>
+              <span class="delete-text">Delete</span>
+            </button>
+          </div>
+        {{/each}}
+      {{else}}
+        <div class="no-saved">No saved trips yet.</div>
+      {{/if}}
+    </div>
+  </div>
+</body>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.delete-btn').forEach(function(btn) {
+        btn.addEventListener('click', async function(e) {
+          const id = btn.getAttribute('data-id');
+          btn.disabled = true;
+          btn.querySelector('.delete-text').textContent = 'Deleting...';
+          try {
+            const res = await fetch(`/delete-trip/${id}`, { method: 'DELETE' });
+            if (res.ok) {
+              btn.closest('.saved-trip').remove();
+              showToast('Trip deleted!', 'success');
+            } else {
+              showToast('Error deleting trip', 'error');
+              btn.disabled = false;
+              btn.querySelector('.delete-text').textContent = 'Delete';
+            }
+          } catch {
+            showToast('Network error', 'error');
+            btn.disabled = false;
+            btn.querySelector('.delete-text').textContent = 'Delete';
+          }
+        });
+      });
+      function showToast(msg, type) {
+        let toast = document.createElement('div');
+        toast.textContent = msg;
+        toast.style.position = 'fixed';
+        toast.style.bottom = '32px';
+        toast.style.left = '50%';
+        toast.style.transform = 'translateX(-50%)';
+        toast.style.background = type === 'success' ? '#38a169' : '#e53e3e';
+        toast.style.color = '#fff';
+        toast.style.padding = '0.8rem 1.5rem';
+        toast.style.borderRadius = '8px';
+        toast.style.fontSize = '1.1rem';
+        toast.style.boxShadow = '0 2px 12px rgba(0,0,0,0.12)';
+        toast.style.zIndex = 9999;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 2200);
+      }
+    });
+  </script>
+</html>
