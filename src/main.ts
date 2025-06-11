@@ -15,7 +15,7 @@ async function bootstrap() {
     new FastifyAdapter(),
   );
   const config = new DocumentBuilder()
-    .setTitle('Trips example')
+    .setTitle('Trips API')
     .setDescription('The Trips API description')
     .setVersion('1.0')
     .build();
