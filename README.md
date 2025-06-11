@@ -64,6 +64,27 @@ EXTERNAL_API_KEY=your-api-key
 
 ---
 
+## User Interface (UI) Overview
+
+The application provides a modern, responsive web UI with the following main views:
+
+- **Home / Search Page** (`/`)
+  - Allows users to search for trips by selecting origin, destination, and sort order (fastest/cheapest).
+  - Features a clean, centered form and a consistent header for navigation.
+  - Results are displayed on a separate page after submitting the form.
+
+- **Search Results Page** (`/search`)
+  - Displays a table of available trips matching the search criteria.
+  - Each trip has a "Save" button (disabled if already saved) for quick addition to your saved list.
+  - Success and error feedback is shown via modern toast notifications.
+
+- **Saved Trips Page** (`/saved-trips`)
+  - Shows all trips the user has saved, presented in a responsive card/grid layout.
+  - Each card includes trip details and a "Delete" button for instant removal (with feedback toasts).
+  - The layout adapts for mobile and desktop, ensuring usability on all devices.
+
+All pages share a consistent header for easy navigation between search and saved trips. The UI is designed for clarity, speed, and a seamless user experience.
+
 ## API Endpoints (Trip Controller)
 
 | Method | Endpoint           | Description                                                      |
@@ -110,4 +131,6 @@ This documentation provides detailed information about all endpoints, request/re
 - Rate limiting.
 - User profile and preferences management.
 - Trip history and analytics.
+---
+
 
