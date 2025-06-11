@@ -25,7 +25,17 @@ docker-compose up -d
 This will start MongoDB on the default port (27017). The `mongo-init/migration.js` script can be used for initial setup if needed.
 
 ---
+## Environment Variables
 
+Create a `.env` file in the root directory with the following variables:
+
+```
+MONGO_URI=mongodb://localhost:27017/bizaway
+EXTERNAL_API_DOMAIN=your-trip-api-domain
+EXTERNAL_API_KEY=your-api-key
+```
+
+---
 ## Running the Project
 
 ### Development
@@ -52,17 +62,7 @@ pnpm run test:cov
 
 ---
 
-## Environment Variables
 
-Create a `.env` file in the root directory with the following variables:
-
-```
-MONGO_URI=mongodb://localhost:27017/bizaway
-EXTERNAL_API_DOMAIN=your-trip-api-domain
-EXTERNAL_API_KEY=your-api-key
-```
-
----
 
 ## User Interface (UI) Overview
 
