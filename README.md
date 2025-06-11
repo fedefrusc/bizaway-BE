@@ -66,7 +66,7 @@ EXTERNAL_API_KEY=your-api-key
 
 ## User Interface (UI) Overview
 
-The application provides a modern, responsive web UI with the following main views:
+Simple but effective UI build with copilot 😁 with the following main views:
 
 - **Home / Search Page** (`/`)
   - Allows users to search for trips by selecting origin, destination, and sort order (fastest/cheapest).
@@ -128,9 +128,8 @@ This documentation provides detailed information about all endpoints, request/re
 
 ### Other Extensible Features
 - Elasticsearch caching for trip search results.
-- Rate limiting.
-- User profile and preferences management.
-- Trip history and analytics.
+- Rate limiting and throttling for API endpoints.
+- Lock mechanism for trip saving to prevent duplicates.
 ---
 
 
