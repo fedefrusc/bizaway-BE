@@ -22,7 +22,7 @@ You can use Docker Compose for a local MongoDB instance:
 docker-compose up -d
 ```
 
-This will start MongoDB on the default port (27017). The `mongo-init/migration.js` script can be used for initial setup if needed.
+This will start MongoDB on the default port (27017). The `mongo-init/migration.js` script is used for initial setup.
 
 ---
 ## Environment Variables
