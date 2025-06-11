@@ -76,6 +76,18 @@ EXTERNAL_API_KEY=your-api-key
 
 ---
 
+## API Documentation (Swagger)
+
+After starting the server, you can access the interactive API documentation powered by Swagger UI at:
+
+```
+http://localhost:3000/api
+```
+
+This documentation provides detailed information about all endpoints, request/response schemas, and allows you to try out the API directly from your browser.
+
+---
+
 ## Main Features
 
 - **Trip Search**: Search for trips by origin, destination, and sort by fastest/cheapest.
