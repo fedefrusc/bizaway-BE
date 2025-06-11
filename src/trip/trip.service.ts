@@ -64,8 +64,6 @@ export class TripsService {
     try {
       await tripData.save();
     } catch (error) {
-      console.log('Error saving trip:', error);
-      
       throw new HttpException(error.errorResponse.errmsg, HttpStatus.BAD_REQUEST);
     }
   }
@@ -76,8 +74,6 @@ export class TripsService {
   public async listTrips(): Promise<TripInterface[]> {
     const TripModel = this.connection.model('Trip');
     const trips = await TripModel.find().exec();
-  
-    console.log('Trips found:', trips.length);
     return trips.map((trip) => ({
       _id: trip._id,
       origin: trip.origin,

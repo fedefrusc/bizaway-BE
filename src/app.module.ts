@@ -9,7 +9,6 @@ import { TripsService } from './trip/trip.service';
     TripModule,
     MongooseModule.forRoot('mongodb://localhost/bizaway'),
   ],
-  controllers: [AppController],
-  providers: [TripsService]
+  controllers: [AppController]
 })
 export class AppModule {}

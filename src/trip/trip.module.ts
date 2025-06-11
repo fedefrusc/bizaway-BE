@@ -5,7 +5,7 @@ import { TripsService } from './trip.service';
 import { HttpModule } from '@nestjs/axios';
 import { Trip, TripSchema } from './trip.schema';
 @Module({
-  imports: [HttpModule, MongooseModule.forFeature([{ name: Trip.name, schema: TripSchema }]),],
+  imports: [HttpModule, MongooseModule.forFeature([{ name: Trip.name, schema: TripSchema }])],
   controllers: [TripsController],
   providers: [TripsService],
   exports: [TripsService, HttpModule],

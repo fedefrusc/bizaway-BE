@@ -6,7 +6,7 @@ import { AppModule } from './../src/app.module';
 import { TripModule } from '../src/trip/trip.module';
 import { TripsService } from '../src/trip/trip.service';
 
-describe('AppController (e2e)', () => {
+describe('TripController (e2e)', () => {
   let app: INestApplication<App>;
   let tripService = { getTrips: (origin, destination) => ['test'] };
   beforeEach(async () => {
